@@ -11,3 +11,24 @@
   App.cable = ActionCable.createConsumer();
 
 }).call(this);
+
+$(".nav").hide();
+$("#hamburger").click(function(){
+  $(".nav").slideToggle("slow", function(){
+    $("#hamburger").hide();
+    $(".nav").show();
+    $("#cross").show();
+  });
+});
+
+
+$("#cross").click(function(event){
+  event.preventDefault();
+  //click event that takes information from the event and prevents refresh
+  if ($("#cross").is(":visible")){
+    $(".nav").slideToggle("slow", function(){
+      $("#cross").hide();
+      $("#hamburger").show();
+    });
+  }
+});

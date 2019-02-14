@@ -1,4 +1,4 @@
-<div id="notice"><%= notice %></div>
+
 
 <h1 id="first">Emily's Blog</h1>
 
@@ -14,18 +14,55 @@
 
 
     <% @posts.each do |post| %>
-      <tr>
-        <div class="blogtitle"><%= post.title %></div>
         <h3><div class="blocktitle2"><%= post.created %></div></h3>
+
+        <div class="blogtitle"><%= post.title %></div>
+        <div class="clearfix"><div class="actionscontainer">
+          <div class="actions"><%= link_to 'Show', post %></div>
+          <div class="actions"><%= link_to 'Edit', edit_post_path(post) %></div>
+          <div class="actions"><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></div>
+        </div></div>
+
         <div class="aboutemilyblock2"><%= post.content %></div>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
     <% end %>
 
 
 
 <br>
 
-<%= link_to 'New Post', new_post_path %>
+
+<div class="top">
+  <button id="top">&#8593;</button>
+</div>
+
+
+<button id="hamburger">&#9776;</button>
+
+<div class="nav">
+    <a href="https://emilyjennings.github.io/">Home</a>
+    <%= link_to 'New Post', new_post_path %>
+    <a href="" id="cross">&#735;</a>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(".nav").hide();
+  $("#hamburger").click(function(){
+    $(".nav").slideToggle("slow", function(){
+      $("#hamburger").hide();
+      $(".nav").show();
+      $("#cross").show();
+    });
+  });
+
+
+  $("#cross").click(function(event){
+    event.preventDefault();
+    //click event that takes information from the event and prevents refresh
+    if ($("#cross").is(":visible")){
+      $(".nav").slideToggle("slow", function(){
+        $("#cross").hide();
+        $("#hamburger").show();
+      });
+    }
+  });
+</script>
